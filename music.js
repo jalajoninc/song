@@ -4,6 +4,16 @@ const util = require('util');
 const readdir = util.promisify(fs.readdir);
 const statdir = util.promisify(fs.stat);
 
+function filterName(d) {
+  var n = d.split(".");
+
+  if ( n.length > 1 ){
+    return( n[0].replace(/[!-@]/g, '') );
+  } else {
+    return( d.replace(/[!-@]/g, '') );
+  }
+}
+
 async function musicFiles(d) {
     let names;
     try {
@@ -15,7 +25,9 @@ async function musicFiles(d) {
     var rv = {};
     for( var i = 0; i < names.length; i++ ){
         if ( !names[i].startsWith('.') ){
-            rv['item'] = names[i];
+            var it = {};
+            it['item'] = names[i];
+            rv[ filterName(names[i]) ] = it;
         }
     }
 
