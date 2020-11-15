@@ -1,6 +1,5 @@
 const directory = './music/';
 const fs = require('fs');
-const ffs = require('fs');
 const util = require('util');
 const readdir = util.promisify(fs.readdir);
 const statdir = util.promisify(fs.stat);
@@ -16,7 +15,6 @@ async function musicFiles(d) {
     var rv = {};
     for( var i = 0; i < names.length; i++ ){
         if ( !names[i].startsWith('.') ){
-            console.log('----', names[i]);
             rv['item'] = names[i];
         }
     }
@@ -24,7 +22,7 @@ async function musicFiles(d) {
     return( rv );
 }
 
-async function myF2(d) {
+async function genre(d) {
     let names;
     try {
       names = await readdir(directory + d);
@@ -35,9 +33,7 @@ async function myF2(d) {
     var rv = {};
     for( var i = 0; i < names.length; i++ ){
         if ( !names[i].startsWith('.') ){
-            console.log('----', names[i]);
             let m = await musicFiles(d + '/' + names[i] );
-
             rv[names[i]] = m;
         }
     }
@@ -45,7 +41,7 @@ async function myF2(d) {
     return( rv );
 }
 
-async function myF() {
+async function myMusic() {
     let names;
     var dict = {};
 
@@ -59,17 +55,8 @@ async function myF() {
         let s = await statdir(directory + names[i] );
         if (s && s.isDirectory()) {
             console.log('--', names[i]);
-            let rv = await myF2(names[i]);
-
+            let rv = await genre(names[i]);
             dict[names[i]] = rv;
-
-            for ( key in rv ){
-                console.log( key );
-            }
-            console.log(JSON.stringify(rv));
-
-        } else {
-            // console.log('No First Name', names[i]);
         }
     }
 
@@ -78,4 +65,4 @@ async function myF() {
 
   }
 
-  myF();
+  myMusic();
