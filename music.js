@@ -21,12 +21,16 @@ async function musicFiles(d) {
     } catch (err) {
       console.log(err);
     }
+    var p = directory + d;
+    var pth = 'https://raw.githubusercontent.com/jalajoninc/song/main';
+    p = p.replace('.', '' );
 
     var rv = {};
     for( var i = 0; i < names.length; i++ ){
         if ( !names[i].startsWith('.') ){
             var it = {};
             it['item'] = names[i];
+            it['url'] = pth + p + '/' + names[i];
             rv[ filterName(names[i]) ] = it;
         }
     }
