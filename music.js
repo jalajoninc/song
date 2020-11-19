@@ -8,9 +8,11 @@ function filterName(d) {
   var n = d.split(".");
 
   if ( n.length > 1 ){
-    return( n[0].replace(/[!-@]/g, '') );
+    // return( n[0].replace(/[!-@]/g, '') );
+    return( n[0] );
   } else {
-    return( d.replace(/[!-@]/g, '') );
+    // return( d.replace(/[!-@]/g, '') );
+    return( d );
   }
 }
 
