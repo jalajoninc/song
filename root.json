@@ -1,0 +1,10 @@
+{
+  "music" : {
+    "url" : "https://raw.githubusercontent.com/jalajoninc/song/main/music.json",
+    "date" : "2018.02.13T15:25:16"
+  },
+  "video" : {
+    "url" : "https://raw.githubusercontent.com/jalajoninc/video/main/video.json",
+    "date" : "2018.02.13T15:25:16"
+  }
+}
